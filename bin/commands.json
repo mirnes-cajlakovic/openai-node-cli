@@ -1,0 +1,571 @@
+[
+  {
+    "name": "listModels",
+    "description": "Lists the currently available models, and provides basic information about each one such as the owner and availability.",
+    "params": []
+  },
+  {
+    "name": "retrieveModel",
+    "description": "Retrieves a model instance, providing basic information about the model such as the owner and permissioning.",
+    "params": [
+      {
+        "name": "model",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of the model to use for this request"
+      }
+    ]
+  },
+  {
+    "name": "createCompletion",
+    "description": "Creates a completion for the provided prompt and parameters",
+    "params": [
+      {
+        "name": "model",
+        "type": "string",
+        "condition": "Required",
+        "description": "ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them.",
+        "default": "text-davinci-003"
+      },
+      {
+        "name": "prompt",
+        "type": "strings...",
+        "condition": "Optional",
+        "default": "<|endoftext|>",
+        "description": "The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays."
+      },
+      {
+        "name": "suffix",
+        "type": "string",
+        "condition": "Optional",
+        "default": "null",
+        "description": "The suffix that comes after a completion of inserted text."
+      },
+      {
+        "name": "max-tokens",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "16",
+        "description": "The maximum number of tokens to generate in the completion."
+      },
+      {
+        "name": "temperature",
+        "type": "float",
+        "condition": "Optional",
+        "default": "0",
+        "description": "What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer."
+      },
+      {
+        "name": "top-p",
+        "type": "float",
+        "condition": "Optional",
+        "default": "1",
+        "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered."
+      },
+      {
+        "name": "n",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "1",
+        "description": "How many completions to generate for each prompt."
+      },
+      {
+        "name": "stream",
+        "type": "boolean",
+        "condition": "Optional",
+        "default": "false",
+        "description": "Whether to stream back partial progress. If set, tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message."
+      },
+      {
+        "name": "logprobs",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "null",
+        "description": "Include the log probabilities on the logprobs most likely tokens, as well the chosen tokens. For example, if logprobs is 5, the API will return a list of the 5 most likely tokens. The API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response."
+      },
+      {
+        "name": "echo",
+        "type": "boolean",
+        "condition": "Optional",
+        "default": "false",
+        "description": "Echo back the prompt in addition to the completion"
+      },
+      {
+        "name": "stop",
+        "type": "strings...",
+        "condition": "Optional",
+        "default": "null",
+        "description": "Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence."
+      },
+      {
+        "name": "presence-penalty",
+        "type": "float",
+        "condition": "Optional",
+        "default": "0",
+        "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics."
+      },
+      {
+        "name": "frequency-penalty",
+        "type": "float",
+        "condition": "Optional",
+        "default": "0",
+        "description": "Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim."
+      },
+      {
+        "name": "best-of",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "1",
+        "description": "Generates best_of completions server-side and returns the 'best' (the one with the highest log probability per token). Results cannot be streamed."
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "condition": "Optional",
+        "description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more."
+      }
+    ]
+  },
+  {
+    "name": "createEdit",
+    "description": "Creates a new edit for the provided input, instruction, and parameters",
+    "params": [
+      {
+        "name": "model",
+        "type": "string",
+        "condition": "Required",
+        "description": "ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them."
+      },
+      {
+        "name": "input",
+        "type": "string",
+        "condition": "Optional",
+        "default": "''",
+        "description": "The input text to use as a starting point for the edit."
+      },
+      {
+        "name": "instruction",
+        "type": "string",
+        "condition": "Required",
+        "description": "The instruction that tells the model how to edit the prompt."
+      },
+      {
+        "name": "n",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "1",
+        "description": "How many edits to generate for the input and instruction."
+      },
+      {
+        "name": "temperature",
+        "type": "float",
+        "condition": "Optional",
+        "default": "1",
+        "description": "What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer."
+      },
+      {
+        "name": "top-p",
+        "type": "float",
+        "condition": "Optional",
+        "default": "1",
+        "description": "An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered."
+      }
+    ]
+  },
+  {
+    "name": "createImage",
+    "description": "Creates an image given a prompt.",
+    "params": [
+      {
+        "name": "prompt",
+        "type": "string",
+        "condition": "Required",
+        "description": "A text description of the desired image(s). The maximum length is 1000 characters."
+      },
+      {
+        "name": "n",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "1",
+        "description": "The number of images to generate. Must be between 1 and 10."
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "condition": "Optional",
+        "default": "1024x1024",
+        "description": "The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024."
+      },
+      {
+        "name": "response-format",
+        "type": "string",
+        "condition": "Optional",
+        "default": "url",
+        "description": "The format in which the generated images are returned. Must be one of url or b64_json."
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "condition": "Optional",
+        "description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more."
+      }
+    ]
+  },
+  {
+    "name": "createImageEdit",
+    "description": "Creates an edited or extended image given an original image and a prompt.",
+    "params": [
+      {
+        "name": "image",
+        "type": "string",
+        "condition": "Required",
+        "description": "The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not provided, image must have transparency, which will be used as the mask."
+      },
+      {
+        "name": "mask",
+        "type": "string",
+        "condition": "Optional",
+        "description": "An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where image should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as image."
+      },
+      {
+        "name": "prompt",
+        "type": "string",
+        "condition": "Required",
+        "description": "A text description of the desired image(s). The maximum length is 1000 characters."
+      },
+      {
+        "name": "n",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "1",
+        "description": "The number of images to generate. Must be between 1 and 10."
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "condition": "Optional",
+        "default": "1024x1024",
+        "description": "The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024."
+      },
+      {
+        "name": "response-format",
+        "type": "string",
+        "condition": "Optional",
+        "default": "url",
+        "description": "The format in which the generated images are returned. Must be one of url or b64_json."
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "condition": "Optional",
+        "description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more."
+      }
+    ]
+  },
+  {
+    "name": "createImageVariation",
+    "description": "Creates a variation of a given image.",
+    "params": [
+      {
+        "name": "image",
+        "type": "string",
+        "condition": "Required",
+        "description": "The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB, and square."
+      },
+      {
+        "name": "n",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "1",
+        "description": "The number of images to generate. Must be between 1 and 10."
+      },
+      {
+        "name": "size",
+        "type": "string",
+        "condition": "Optional",
+        "default": "1024x1024",
+        "description": "The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024."
+      },
+      {
+        "name": "response-format",
+        "type": "string",
+        "condition": "Optional",
+        "default": "url",
+        "description": "The format in which the generated images are returned. Must be one of url or b64_json."
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "condition": "Optional",
+        "description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more."
+      }
+    ]
+  },
+  {
+    "name": "createEmbedding",
+    "description": "Creates an embedding vector representing the input text.",
+    "params": [
+      {
+        "name": "model",
+        "type": "string",
+        "condition": "Required",
+        "description": "ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them."
+      },
+      {
+        "name": "input",
+        "type": "strings...",
+        "condition": "Required",
+        "description": "Input text to get embeddings for, encoded as a string or array of tokens. To get embeddings for multiple inputs in a single request, pass an array of strings or array of token arrays. Each input must not exceed 8192 tokens in length."
+      },
+      {
+        "name": "user",
+        "type": "string",
+        "condition": "Optional",
+        "description": "A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more."
+      }
+    ]
+  },
+  {
+    "name": "listFiles",
+    "description": "Returns a list of files that belong to the user's organization.",
+    "params": []
+  },
+  {
+    "name": "createFile",
+    "description": "Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB. Please contact us if you need to increase the storage limit.",
+    "params": [
+      {
+        "name": "file",
+        "type": "string",
+        "condition": "Required",
+        "description": "Name of the JSON Lines file to be uploaded."
+      },
+      {
+        "name": "purpose",
+        "type": "string",
+        "condition": "Required",
+        "description": "The intended purpose of the uploaded documents."
+      }
+    ]
+  },
+  {
+    "name": "deleteFile",
+    "description": "Delete a file.",
+    "params": [
+      {
+        "name": "file-id",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of the file to use for this request"
+      }
+    ]
+  },
+  {
+    "name": "retrieveFile",
+    "description": "Returns information about a specific file.",
+    "params": [
+      {
+        "name": "file-id",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of the file to use for this request"
+      }
+    ]
+  },
+  {
+    "name": "downloadFile",
+    "description": "Returns the contents of the specified file",
+    "params": [
+      {
+        "name": "file-id",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of the file to use for this request"
+      }
+    ]
+  },
+  {
+    "name": "createFineTune",
+    "description": "Creates a job that fine-tunes a specified model from a given dataset.",
+    "params": [
+      {
+        "name": "training-file",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of an uploaded file that contains training data."
+      },
+      {
+        "name": "validation-file",
+        "type": "string",
+        "condition": "Optional",
+        "description": "The ID of an uploaded file that contains validation data."
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "condition": "Optional",
+        "default": "curie",
+        "description": "The name of the base model to fine-tune. You can select one of 'ada', 'babbage', 'curie', 'davinci', or a fine-tuned model created after 2022-04-21. To learn more about these models, see the Models documentation."
+      },
+      {
+        "name": "n-epochs",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "4",
+        "description": "The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset."
+      },
+      {
+        "name": "batch-size",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "null",
+        "description": "The batch size to use for training. The batch size is the number of training examples used to train a single forward and backward pass."
+      },
+      {
+        "name": "learning-rate_multiplier",
+        "type": "float",
+        "condition": "Optional",
+        "default": "null",
+        "description": "The learning rate multiplier to use for training. The fine-tuning learning rate is the original learning rate used for pretraining multiplied by this value."
+      },
+      {
+        "name": "prompt-loss_weight",
+        "type": "float",
+        "condition": "Optional",
+        "default": "0.01",
+        "description": "The weight to use for loss on the prompt tokens. This controls how much the model tries to learn to generate the prompt (as compared to the completion which always has a weight of 1.0), and can add a stabilizing effect to training when completions are short."
+      },
+      {
+        "name": "compute-classification_metrics",
+        "type": "boolean",
+        "condition": "Optional",
+        "default": "false",
+        "description": "If set, we calculate classification-specific metrics such as accuracy and F-1 score using the validation set at the end of every epoch. These metrics can be viewed in the results file."
+      },
+      {
+        "name": "classification-n_classes",
+        "type": "integer",
+        "condition": "Optional",
+        "default": "null",
+        "description": "The number of classes in a classification task."
+      },
+      {
+        "name": "classification-positive_class",
+        "type": "string",
+        "condition": "Optional",
+        "default": "null",
+        "description": "The positive class in binary classification."
+      },
+      {
+        "name": "classification-betas",
+        "type": "array",
+        "condition": "Optional",
+        "default": "null",
+        "description": "If this is provided, we calculate F-beta scores at the specified beta values. The F-beta score is a generalization of F-1 score. This is only used for binary classification."
+      },
+      {
+        "name": "suffix",
+        "type": "string",
+        "condition": "Optional",
+        "default": "null",
+        "description": "A string of up to 40 characters that will be added to your fine-tuned model name."
+      }
+    ]
+  },
+  {
+    "name": "listFineTunes",
+    "description": "List your organization's fine-tuning jobs",
+    "params": []
+  },
+  {
+    "name": "retrieveFineTune",
+    "description": "Gets info about the fine-tune job.",
+    "params": [
+      {
+        "name": "fine-tune_id",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of the fine-tune job"
+      }
+    ]
+  },
+  {
+    "name": "cancelFineTune",
+    "description": "Immediately cancel a fine-tune job.",
+    "params": [
+      {
+        "name": "fine-tune_id",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of the fine-tune job to cancel"
+      }
+    ]
+  },
+  {
+    "name": "listFineTuneEvents",
+    "description": "Get fine-grained status updates for a fine-tune job.",
+    "params": [
+      {
+        "name": "fine-tune_id",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of the fine-tune job to get events for."
+      },
+      {
+        "name": "stream",
+        "type": "boolean",
+        "condition": "Optional",
+        "default": "false",
+        "description": "Whether to stream events for the fine-tune job. If set to true, events will be sent as data-only server-sent events as they become available. The stream will terminate with a data: [DONE] message when the job is finished (succeeded, cancelled, or failed)."
+      }
+    ]
+  },
+  {
+    "name": "deleteModel",
+    "description": "Delete a fine-tuned model. You must have the Owner role in your organization.",
+    "params": [
+      {
+        "name": "model",
+        "type": "string",
+        "condition": "Required",
+        "description": "The model to delete"
+      }
+    ]
+  },
+  {
+    "name": "createModeration",
+    "description": "Classifies if text violates OpenAI's Content Policy",
+    "params": [
+      {
+        "name": "input",
+        "type": "strings...",
+        "condition": "Required",
+        "description": "The input text to classify"
+      },
+      {
+        "name": "model",
+        "type": "string",
+        "condition": "Optional",
+        "default": "text-moderation-latest",
+        "description": "Two content moderations models are available: text-moderation-stable and text-moderation-latest."
+      }
+    ]
+  },
+  {
+    "name": "listEngines",
+    "description": "Lists the currently available (non-finetuned) models, and provides basic information about each one such as the owner and availability.",
+    "params": []
+  },
+  {
+    "name": "retrieveEngine",
+    "description": "Retrieves a model instance, providing basic information about it such as the owner and availability.",
+    "params": [
+      {
+        "name": "engine-id",
+        "type": "string",
+        "condition": "Required",
+        "description": "The ID of the engine to use for this request"
+      }
+    ]
+  }
+]

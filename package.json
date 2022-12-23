@@ -1,0 +1,26 @@
+{
+  "name": "openai-node",
+  "version": "1.0.0",
+  "description": "A wrapper around openai's node api. This application provides normalized input and output to the api methods and a command line interface managed in a node enviroment.",
+  "main": "index.js",
+  "bin": {
+    "openai": "bin/cli.js"
+  },
+  "private": true,
+  "scripts": {
+    "test": "nyc --reporter=html --reporter=text mocha"
+  },
+  "author": "Mirnes Cajlakovic",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^9.4.1",
+    "lodash": "^4.17.21",
+    "openai": "^3.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "nyc": "^15.1.0",
+    "sinon": "^15.0.1"
+  }
+}
