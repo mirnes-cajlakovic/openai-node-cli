@@ -4,6 +4,12 @@ const { Command, Option } = require('commander')
 const { OpenAIClient } = require('../index')
 const commands = require('./commands')
 
+
+/**
+ * Create a new OpenAI client for each command.
+ */
+const openaiClient = new OpenAIClient(process.env.OPENAI_API_KEY)
+
 /**
  * The main program for the OpenAI CLI.
  */
@@ -21,11 +27,6 @@ program
  * Iterate through the available commands and add them to the program.
  */
 for (var command of commands.sort((a, b) => a.name.localeCompare(b.name))) {
-
-  /**
-   * Create a new OpenAI client for each command.
-   */
-  const openaiClient = new OpenAIClient(process.env.OPENAI_API_KEY)
 
   /**
    * Create a new command with the specified name and description.

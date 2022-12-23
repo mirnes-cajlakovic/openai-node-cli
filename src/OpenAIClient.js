@@ -1,5 +1,5 @@
 const { Configuration, OpenAIApi } = require('openai')
-const { mapKeys, snakeCase } = require('lodash')
+const { mapKeys, snakeCase, get } = require('lodash')
 const fs = require('fs')
 
 /**
@@ -40,7 +40,7 @@ class OpenAIClient {
     if (this.openai[methodName]) {
       return await this.openai[methodName](snakeCaseOptions)
         .then((response) => response.data)
-        .catch((error) => error?.response?.data)
+        .catch((error) => error?.response?.data || error)
     }
   }
   
@@ -60,9 +60,8 @@ class OpenAIClient {
       const parameters = keys.map((key) => {
         const regex = /<(.*?)>/
         const match = key.match(regex)
-        if (match[1] && match[1] === 'stream') {
-          key  = key.replace(regex, '')
-          return fs.createReadStream(options[key])
+        if (get(match, 1) === 'stream') {
+          return fs.createReadStream(options[key.replace(regex, '')])
         }
         return options[key]
       })
