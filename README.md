@@ -128,7 +128,7 @@ Immediately cancel a fine-tune job.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `fine-tune_id` | `string` | `null` | The ID of the fine-tune job to cancel. |
+| `fine-tune-id` | `string` | `null` | The ID of the fine-tune job to cancel. |
 
 
 createCompletion [options]
@@ -237,9 +237,11 @@ Creates an image given a prompt.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `"image-alpha-001"` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
-| `prompt` | `string` | `` | The prompt to generate an image for. |
-| `size` | `string` | `"1024x1024"` | The size of the image to generate. Can be "1024x1024" or "512x512". |
+| `prompt` | `string` | `` | The prompt to guide the edit of the image. |
+| `n` | `integer` | `1` | The number of images to generate. Must be between 1 and 10. |
+| `size` | `` | `"1024x1024"` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
+| `response-format` | `string` | `url` | The format in which the generated images are returned. Must be one of url or b64_json. |
+| `user` | `string` | `` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
 
 #### Example:
 ```bash
@@ -253,13 +255,17 @@ Creates an edited or extended image given an original image and a prompt.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `"image-alpha-001"` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
+| `image` | `string` | `` | The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not provided, image must have transparency, which will be used as the mask. |
+| `mask` | `string` | `` | An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where image should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as image. |
 | `prompt` | `string` | `` | The prompt to guide the edit of the image. |
-| `image` | `string` | `` | The URL or ID of the image to edit. |
+| `n` | `integer` | `1` | The number of images to generate. Must be between 1 and 10. |
+| `size` | `` | `"1024x1024"` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
+| `response-format` | `string` | `url` | The format in which the generated images are returned. Must be one of url or b64_json. |
+| `user` | `string` | `` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
 
 #### Example:
 ```bash
-openai createImageEdit --prompt "Add a cat to the image" --image "https://example.com/image.jpg"
+openai createImageEdit --prompt "Add a cat to the image" --image "photo.png" --mask "photo-mask.png"
 
 ```
 
@@ -270,14 +276,16 @@ Creates a variation of a given image.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `"image-alpha-001"` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
-| `image` | `string` | `` | The URL or ID of the image to create a variation of. |
-| `prompt` | `string` | `` | The prompt to guide the variation of the image. |
+| `image` | `string` | `` | The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB, and square. |
+| `n` | `integer` | `1` | The number of images to generate. Must be between 1 and 10. |
+| `size` | `` | `"1024x1024"` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
+| `response-format` | `string` | `url` | The format in which the generated images are returned. Must be one of url or b64_json. |
+| `user` | `string` | `` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
 
 #### Example:
 
 ```bash
-openai createImageVariation --prompt "Add a cat to the image" --image "https://example.com/image.jpg"
+openai createImageVariation --image "fox.png" --response-format "b64_json"
 ```
 
 ### createModeration [options]
@@ -287,8 +295,8 @@ Classifies if text violates OpenAI's Content Policy
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `"text-davinci-003"` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
 | `input` | `string` | `` | The input text to classify. |
+| `model` | `string` | `"text-moderation-latest"` | Two content moderations models are available: text-moderation-stable and text-moderation-latest. |
 
 #### Example:
 ```bash
@@ -302,11 +310,11 @@ Delete a file.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `file` | `string` | `` | The ID of the file to delete. |
+| `file-id` | `string` | `` | The ID of the file to delete. |
 
 #### Example:
 ```bash
-openai deleteFile --file "my_file_id"
+openai deleteFile --file-id "file-i9DZk2twt4deNezMYtPf1LCN"
 ```
 
 ### deleteModel [options]
@@ -320,7 +328,7 @@ Delete a fine-tuned model. You must have the Owner role in your organization.
 
 #### Example:
 ```bash
-openai deleteModel --model "text-davinci-002"
+openai deleteModel --model "davinci:ft-org-domain-2022-12-22-07-26-01"
 ```
 
 ### downloadFile [options]
@@ -330,11 +338,11 @@ Returns the contents of the specified file.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `file` | `string` | `` | The ID of the file to download. |
+| `file-id` | `string` | `` | The ID of the file to download. |
 
 #### Example:
 ```bash
-openai downloadFile --file "my_file_id"
+openai downloadFile --file "file-i9DZk2twt4deNezMYtPf1LCN"
 ```
 
 ### listEngines
@@ -360,11 +368,12 @@ Get fine-grained status updates for a fine-tune job.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `` | ID of the model to get fine-tune events for. |
+| `fine-tune-id` | `string` | `` | The ID of the fine-tune job to get events for. |
+| `stream` | `boolean` | `false` | Whether to stream events for the fine-tune job. If set to true, events will be sent as data-only server-sent events as they become available. The stream will terminate with a data: [DONE] message when the job is finished (succeeded, cancelled, or failed). |
 
 #### Example:
 ```bash
-openai listFineTuneEvents --model "text-davinci-002"
+openai listFineTuneEvents --fine-tune-id "ft-vMYr5UujI7bKEHmObuHXbtB"
 ```
 
 ### listFineTunes
@@ -390,11 +399,11 @@ Retrieves a model instance, providing basic information about it such as the own
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `` | ID of the model to retrieve. |
+| `engine-id` | `string` | `` | The ID of the engine to use for this request. |
 
 #### Example:
 ```bash
-openai retrieveEngine --model "text-davinci-002"
+openai retrieveEngine --engine-id "text-search-babbage-query-001"
 ```
 
 ### retrieveFile [options]
@@ -404,11 +413,11 @@ Returns information about a specific file.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `file` | `string` | `` | The ID of the file to retrieve information for. |
+| `file-id` | `string` | `` | The ID of the file to use for this request. |
 
 #### Example:
 ```bash
-openai retrieveFile --file "my_file_id"
+openai retrieveFile --file-id "file-i9DZk2twt4deNezMYtPf1LCN"
 ```
 
 ### retrieveFineTune [options]
@@ -418,11 +427,11 @@ Gets info about the fine-tune job.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `` | ID of the model to get fine-tune information for. |
+| `fine-tune-id` | `string` | `` | The ID of the fine-tune job. |
 
 #### Example:
 ```bash
-openai retrieveFineTune --model "text-davinci-002"
+openai retrieveFineTune --fine-tune-id "ft-vMYr5UujI7bKEHmObuHXbtB"
 ```
 
 ### retrieveModel [options]
@@ -432,11 +441,11 @@ Retrieves a model instance, providing basic information about the model such as 
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `` | ID of the model to retrieve. |
+| `model` | `string` | `` | The ID of the model to retrieve. |
 
 #### Example:
 ```bash
-openai retrieveModel --model "text-davinci-002"
+openai retrieveModel --model "text-davinci-003"
 ```
 
 ### help [command]
