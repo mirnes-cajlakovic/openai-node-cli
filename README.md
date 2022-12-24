@@ -1,4 +1,4 @@
-# OpenAI Node API
+# OpenAI Node.js API
 ### Application Programming Interface
 
 This package provides a client for making requests to the OpenAI API. It allows you to access various capabilities of the OpenAI API, such as creating completions, images, embeddings, uploading and downloading files, and managing fine-tune jobs and models.
@@ -8,7 +8,7 @@ This package provides a client for making requests to the OpenAI API. It allows 
 Use Node Package Manager (NPM) to install the package.
 
 ```bash
-npm install --save -global mirnes-cajlakovic/openai-node
+npm install --save --global mirnes-cajlakovic/openai-node
 ```
 
 ## Usage
@@ -107,7 +107,7 @@ createImageVariationAndDownload()
 
 You can find more information about the OpenAI API and the available methods and options in the [API documentation](https://beta.openai.com/docs/api-reference/overview).
 
-# OpenAI Node CLI
+# OpenAI Node.js CLI
 ### Command Line Interface
 The `openai` command is a command line interface (CLI) for interacting with the OpenAI API. It allows you to perform various operations using the OpenAI API, such as creating completions, images, and embeddings, uploading and downloading files, and managing fine-tune jobs and models.
 
