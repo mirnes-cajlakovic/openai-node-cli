@@ -2,6 +2,34 @@
 ### Command Line Interface
 The `openai-cli` package is a command line interface (CLI) for interacting with the OpenAI API. It allows you to perform various operations using the OpenAI API, such as creating completions, images, and embeddings, uploading and downloading files, and managing fine-tune jobs and models.
 
+## Overview
+*(Installation)[#installation]
+*(Usage)[#usage]
+*(Commands)[#commands]
+  *(cancelFineTune)[#cancelFineTune]
+  *(createCompletion)[#createCompletion]
+  *(createEdit)[#createEdit]
+  *(createEmbedding)[#createEmbedding]
+  *(createFile)[#createFile]
+  *(createFineTune)[#createFineTune]
+  *(createImage)[#createImage]
+  *(createImageEdit)[#createImageEdit]
+  *(createImageVariation)[#createImageVariation]
+  *(createModeration)[#createModeration]
+  *(deleteFile)[#deleteFile]
+  *(deleteModel)[#deleteModel]
+  *(downloadFile)[#downloadFile]
+  *(listEngines)[#listEngines]
+  *(listFiles)[#listFiles]
+  *(listFineTuneEvents)[#listFineTuneEvents]
+  *(listFineTunes)[#listFineTunes]
+  *(listModels)[#listModels]
+  *(retrieveEngine)[#retrieveEngine]
+  *(retrieveFile)[#retrieveFile]
+  *(retrieveFineTune)[#retrieveFineTune]
+  *(retrieveModel)[#retrieveModel]
+
+
 ## Installation
 
 Use Node Package Manager (NPM) to install the package globally.
