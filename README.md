@@ -1,100 +1,24 @@
-# OpenAI Node.js API
-### Application Programming Interface
-
-This package provides a client for making requests to the OpenAI API. It allows you to access various capabilities of the OpenAI API, such as creating completions, images, embeddings, uploading and downloading files, and managing fine-tune jobs and models.
+# OpenAI Node.js CLI
+### Command Line Interface
+The `openai-cli` package is a command line interface (CLI) for interacting with the OpenAI API. It allows you to perform various operations using the OpenAI API, such as creating completions, images, and embeddings, uploading and downloading files, and managing fine-tune jobs and models.
 
 ## Installation
 
 Use Node Package Manager (NPM) to install the package.
 
 ```bash
-npm install --save --global mirnes-cajlakovic/openai-node
+npm install openai-cli
 ```
 
 ## Usage
-To use the OpenAIClient, you will need to require the OpenAIClient class and create a new instance of the client by passing in your API key. You can obtain an API key from [beta.openai.com/account/api-keys](https://beta.openai.com/account/api-keys). It is recommended to setup the api key as an enviroment variable.
 
-```javascript
-const { OpenAIClient } = require('openai-client')
+To use the openai api, you will need to create an api key from [beta.openai.com/account/api-keys](https://beta.openai.com/account/api-keys). It is recommended to setup the api key as an enviroment variable.
 
-const client = new OpenAIClient(proccess.env.OPENAI_API_KEY)
+```bash
+export OPENAI_API_KEY="YOUR_API_KEY_HERE"
 ```
 
-To make a request to the OpenAI API, you can use the request method of the client and pass in the name of the method you want to call and an object of options for the request:
-
-```javascript
-client.request('createCompletion', {
-  'model': 'text-davinci-003',
-  'prompt': ['Say this is a test'],
-  'maxTokens': 7,
-  'temperature': 0,
-  'topP': 1,
-  'n': 1,
-  'stream': false,
-  'logprobs': null,
-  'stop': '\n'
-})
-```
-
-### Available Methods
-
-| Method Name             | Description                                                                              |
-|-------------------------|------------------------------------------------------------------------------------------|
-| `request(methodName, options)` | Makes a request to the OpenAI API with the specified method name and options.          |
-| `cancelFineTune(options)` | Cancels the fine-tuning process with the specified ID.                                   |
-| `createFile(options)` | Creates a file for use with the OpenAI API.                                               |
-| `createImageEdit(options)` | Creates an edited version of the specified image using the specified mask.               |
-| `createImageVariation(options)` | Creates a variation of the specified image.                                            |
-| `deleteFile(options)` | Deletes the specified file.                                                               |
-| `deleteModel(options)` | Deletes the specified model.                                                              |
-| `downloadFile(options)` | Downloads the specified file.                                                            |
-| `retrieveFile(options)` | Retrieves information about the specified file.                                           |
-| `retrieveFineTune(options)` | Retrieves information about the specified fine-tuning process.                           |
-| `retrieveModel(options)` | Retrieves information about the specified model.                                         |
-
-
-
-## Example
-
-Here is an example of how you could use the OpenAIClient to create a variation of an image and download the resulting image:
-
-```javascript
-const fs = require('fs')
-const { OpenAIClient } = require('openai-client')
-
-const apiKey = 'YOUR_API_KEY'
-const client = new OpenAIClient(apiKey)
-
-async function createImageVariationAndDownload() {
-  // Create the image variation
-  const variationResponse = await client.createImageVariation({
-    image: '/path/to/image.jpg',
-    n: 1,
-    size: 512,
-    responseFormat: 'url',
-    user: 'me'
-  })
-
-  // Get the URL of the resulting image
-  const imageUrl = variationResponse.data.url
-
-  // Download the image
-  const imageData = await client.downloadFile({ fileId: imageUrl })
-
-  // Save the image to a file
-  fs.writeFileSync('/path/to/downloaded_image.jpg', imageData)
-}
-
-createImageVariationAndDownload()
-```
-
-
-You can find more information about the OpenAI API and the available methods and options in the [API documentation](https://beta.openai.com/docs/api-reference/overview).
-
-# OpenAI Node.js CLI
-### Command Line Interface
-The `openai` command is a command line interface (CLI) for interacting with the OpenAI API. It allows you to perform various operations using the OpenAI API, such as creating completions, images, and embeddings, uploading and downloading files, and managing fine-tune jobs and models.
-
+## Commands:
 
 #### Options:
 
@@ -102,8 +26,6 @@ The `openai` command is a command line interface (CLI) for interacting with the 
 |------|------|---------|-------------|
 | `version` | `boolean` | `false` | Output the version number of the openai cli. |
 | `help` | `boolean` | `false` | Display help for a specific command or general help if no command is provided. |
-
-## Commands:
 
 cancelFineTune [options]
 Immediately cancel a fine-tune job.
@@ -439,5 +361,3 @@ Display help for a specific command.
 ```bash
 openai help createCompletion
 ```
-
-
