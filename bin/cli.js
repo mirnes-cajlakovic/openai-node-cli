@@ -19,8 +19,8 @@ const program = new Command()
  * Set the name, description, and version of the program.
  */
 program
-  .name('openai-node')
-  .description('A command line interface (cli) for handling openai-node api operations.')
+  .name('openai')
+  .description('The openai command is a command line interface (CLI) for interacting with the OpenAI API. It allows you to perform various operations using the OpenAI API, such as creating completions, images, and embeddings, uploading and downloading files, and managing fine-tune jobs and models.')
   .version('1.0.0')
 
 /**

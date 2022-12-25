@@ -422,35 +422,35 @@
         "description": "The batch size to use for training. The batch size is the number of training examples used to train a single forward and backward pass."
       },
       {
-        "name": "learning-rate_multiplier",
+        "name": "learning-rate-multiplier",
         "type": "float",
         "condition": "Optional",
         "default": "null",
         "description": "The learning rate multiplier to use for training. The fine-tuning learning rate is the original learning rate used for pretraining multiplied by this value."
       },
       {
-        "name": "prompt-loss_weight",
+        "name": "prompt-loss-weight",
         "type": "float",
         "condition": "Optional",
         "default": "0.01",
         "description": "The weight to use for loss on the prompt tokens. This controls how much the model tries to learn to generate the prompt (as compared to the completion which always has a weight of 1.0), and can add a stabilizing effect to training when completions are short."
       },
       {
-        "name": "compute-classification_metrics",
+        "name": "compute-classification-metrics",
         "type": "boolean",
         "condition": "Optional",
         "default": "false",
         "description": "If set, we calculate classification-specific metrics such as accuracy and F-1 score using the validation set at the end of every epoch. These metrics can be viewed in the results file."
       },
       {
-        "name": "classification-n_classes",
+        "name": "classification-n-classes",
         "type": "integer",
         "condition": "Optional",
         "default": "null",
         "description": "The number of classes in a classification task."
       },
       {
-        "name": "classification-positive_class",
+        "name": "classification-positive-class",
         "type": "string",
         "condition": "Optional",
         "default": "null",
@@ -482,7 +482,7 @@
     "description": "Gets info about the fine-tune job.",
     "params": [
       {
-        "name": "fine-tune_id",
+        "name": "fine-tune-id",
         "type": "string",
         "condition": "Required",
         "description": "The ID of the fine-tune job"
@@ -494,7 +494,7 @@
     "description": "Immediately cancel a fine-tune job.",
     "params": [
       {
-        "name": "fine-tune_id",
+        "name": "fine-tune-id",
         "type": "string",
         "condition": "Required",
         "description": "The ID of the fine-tune job to cancel"
@@ -506,7 +506,7 @@
     "description": "Get fine-grained status updates for a fine-tune job.",
     "params": [
       {
-        "name": "fine-tune_id",
+        "name": "fine-tune-id",
         "type": "string",
         "condition": "Required",
         "description": "The ID of the fine-tune job to get events for."
