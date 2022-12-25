@@ -4,10 +4,10 @@ The `openai-cli` package is a command line interface (CLI) for interacting with 
 
 ## Installation
 
-Use Node Package Manager (NPM) to install the package.
+Use Node Package Manager (NPM) to install the package globally.
 
 ```bash
-npm install openai-cli
+npm install -g openai-cli
 ```
 
 ## Usage
