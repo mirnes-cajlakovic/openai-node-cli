@@ -44,7 +44,7 @@ Creates a completion for the provided prompt and parameters.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `"text-davinci-003"` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
+| `model` | `string` | `text-davinci-003` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
 | `prompt` | `strings...` | `""` | The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays. |
 | `suffix` | `string` | `null` | The suffix that comes after a completion of inserted text. |
 | `max-tokens` | `integer` | `16` | The maximum number of tokens to generate in the completion. |
@@ -69,9 +69,9 @@ Creates a new edit for the provided input, instruction, and parameters.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `"text-davinci-003"` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
-| `input` | `string` | `` | The input text to edit. |
-| `instruction` | `string` | `` | The instruction to guide the edit. |
+| `model` | `string` | `text-davinci-003` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
+| `input` | `string` | `undefined` | The input text to edit. |
+| `instruction` | `string` | `undefined` | The instruction to guide the edit. |
 | `n` | `integer` | `1` | How many edits to generate for the input and instruction. |
 | `temperature` | `float` | `0.7` | What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined answer. |
 | `top-p` | `float` | `1` | An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.  |
@@ -88,8 +88,8 @@ Creates an embedding vector representing the input text.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `"text-davinci-003"` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
-| `input` | `string` | `` | The input text to generate an embedding for. |
+| `model` | `string` | `text-davinci-003` | ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. |
+| `input` | `string` | `undefined` | The input text to generate an embedding for. |
 | `user` | `string` | `null` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
 
 #### Example:
@@ -104,8 +104,8 @@ Upload a file that contains document(s) to be used across various endpoints/feat
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `file` | `string` | `` | Name of the JSON Lines file to be uploaded. |
-| `purpose` | `string` | `` | The intended purpose of the uploaded documents. |
+| `file` | `string` | `undefined` | Name of the JSON Lines file to be uploaded. |
+| `purpose` | `string` | `undefined` | The intended purpose of the uploaded documents. |
 
 #### Example:
 ```bash
@@ -119,8 +119,8 @@ Creates a job that fine-tunes a specified model from a given dataset.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `training-file` | `string` | `` | The ID of an uploaded file that contains training data. |
-| `validation-file` | `string` | `` | The ID of an uploaded file that contains validation data. |
+| `training-file` | `string` | `undefined` | The ID of an uploaded file that contains training data. |
+| `validation-file` | `string` | `undefined` | The ID of an uploaded file that contains validation data. |
 | `n-epochs` | `integer` | `5` | The number of epochs to train the model for. An epoch refers to one full cycle through the training dataset. |
 | `batch-size` | `integer` | `null` | The batch size to use for training. The batch size is the number of training examples used to train a single forward and backward pass. |
 | `learning-rate-multiplier` | `float` | `null` | The learning rate multiplier to use for training. The fine-tuning learning rate is the original learning rate used for pretraining multiplied by this value. |
@@ -143,11 +143,11 @@ Creates an image given a prompt.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `prompt` | `string` | `` | The prompt to guide the edit of the image. |
+| `prompt` | `string` | `undefined` | The prompt to guide the edit of the image. |
 | `n` | `integer` | `1` | The number of images to generate. Must be between 1 and 10. |
-| `size` | `` | `"1024x1024"` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
+| `size` | `undefined` | `1024x1024` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
 | `response-format` | `string` | `url` | The format in which the generated images are returned. Must be one of url or b64_json. |
-| `user` | `string` | `` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
+| `user` | `string` | `undefined` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
 
 #### Example:
 ```bash
@@ -161,13 +161,13 @@ Creates an edited or extended image given an original image and a prompt.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `image` | `string` | `` | The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not provided, image must have transparency, which will be used as the mask. |
-| `mask` | `string` | `` | An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where image should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as image. |
-| `prompt` | `string` | `` | The prompt to guide the edit of the image. |
+| `image` | `string` | `undefined` | The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask is not provided, image must have transparency, which will be used as the mask. |
+| `mask` | `string` | `undefined` | An additional image whose fully transparent areas (e.g. where alpha is zero) indicate where image should be edited. Must be a valid PNG file, less than 4MB, and have the same dimensions as image. |
+| `prompt` | `string` | `undefined` | The prompt to guide the edit of the image. |
 | `n` | `integer` | `1` | The number of images to generate. Must be between 1 and 10. |
-| `size` | `` | `"1024x1024"` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
+| `size` | `undefined` | `1024x1024` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
 | `response-format` | `string` | `url` | The format in which the generated images are returned. Must be one of url or b64_json. |
-| `user` | `string` | `` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
+| `user` | `string` | `undefined` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
 
 #### Example:
 ```bash
@@ -182,11 +182,11 @@ Creates a variation of a given image.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `image` | `string` | `` | The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB, and square. |
+| `image` | `string` | `undefined` | The image to use as the basis for the variation(s). Must be a valid PNG file, less than 4MB, and square. |
 | `n` | `integer` | `1` | The number of images to generate. Must be between 1 and 10. |
-| `size` | `` | `"1024x1024"` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
+| `size` | `undefined` | `1024x1024` | The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024. |
 | `response-format` | `string` | `url` | The format in which the generated images are returned. Must be one of url or b64_json. |
-| `user` | `string` | `` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
+| `user` | `string` | `undefined` | A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more. |
 
 #### Example:
 
@@ -201,8 +201,8 @@ Classifies if text violates OpenAI's Content Policy
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `input` | `string` | `` | The input text to classify. |
-| `model` | `string` | `"text-moderation-latest"` | Two content moderations models are available: text-moderation-stable and text-moderation-latest. |
+| `input` | `string` | `undefined` | The input text to classify. |
+| `model` | `string` | `text-moderation-latest` | Two content moderations models are available: text-moderation-stable and text-moderation-latest. |
 
 #### Example:
 ```bash
@@ -216,7 +216,7 @@ Delete a file.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `file-id` | `string` | `` | The ID of the file to delete. |
+| `file-id` | `string` | `undefined` | The ID of the file to delete. |
 
 #### Example:
 ```bash
@@ -230,7 +230,7 @@ Delete a fine-tuned model. You must have the Owner role in your organization.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `` | ID of the model to delete. |
+| `model` | `string` | `undefined` | ID of the model to delete. |
 
 #### Example:
 ```bash
@@ -244,7 +244,7 @@ Returns the contents of the specified file.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `file-id` | `string` | `` | The ID of the file to download. |
+| `file-id` | `string` | `undefined` | The ID of the file to download. |
 
 #### Example:
 ```bash
@@ -274,7 +274,7 @@ Get fine-grained status updates for a fine-tune job.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `fine-tune-id` | `string` | `` | The ID of the fine-tune job to get events for. |
+| `fine-tune-id` | `string` | `undefined` | The ID of the fine-tune job to get events for. |
 | `stream` | `boolean` | `false` | Whether to stream events for the fine-tune job. If set to true, events will be sent as data-only server-sent events as they become available. The stream will terminate with a data: [DONE] message when the job is finished (succeeded, cancelled, or failed). |
 
 #### Example:
@@ -305,7 +305,7 @@ Retrieves a model instance, providing basic information about it such as the own
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `engine-id` | `string` | `` | The ID of the engine to use for this request. |
+| `engine-id` | `string` | `undefined` | The ID of the engine to use for this request. |
 
 #### Example:
 ```bash
@@ -319,7 +319,7 @@ Returns information about a specific file.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `file-id` | `string` | `` | The ID of the file to use for this request. |
+| `file-id` | `string` | `undefined` | The ID of the file to use for this request. |
 
 #### Example:
 ```bash
@@ -333,7 +333,7 @@ Gets info about the fine-tune job.
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `fine-tune-id` | `string` | `` | The ID of the fine-tune job. |
+| `fine-tune-id` | `string` | `undefined` | The ID of the fine-tune job. |
 
 #### Example:
 ```bash
@@ -347,7 +347,7 @@ Retrieves a model instance, providing basic information about the model such as 
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `model` | `string` | `` | The ID of the model to retrieve. |
+| `model` | `string` | `undefined` | The ID of the model to retrieve. |
 
 #### Example:
 ```bash
