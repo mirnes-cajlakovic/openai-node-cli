@@ -12,12 +12,12 @@ npm install --save --global mirnes-cajlakovic/openai-node
 ```
 
 ## Usage
-To use the OpenAIClient, you will need to require the OpenAIClient class and create a new instance of the client by passing in your API key. You can obtain an API key from [beta.openai.com/account/api-keys](https://beta.openai.com/account/api-keys).
+To use the OpenAIClient, you will need to require the OpenAIClient class and create a new instance of the client by passing in your API key. You can obtain an API key from [beta.openai.com/account/api-keys](https://beta.openai.com/account/api-keys). It is recommended to setup the api key as an enviroment variable.
 
 ```javascript
 const { OpenAIClient } = require('openai-client')
 
-const client = new OpenAIClient(apiKey)
+const client = new OpenAIClient(proccess.env.OPENAI_API_KEY)
 ```
 
 To make a request to the OpenAI API, you can use the request method of the client and pass in the name of the method you want to call and an object of options for the request:
@@ -33,22 +33,6 @@ client.request('createCompletion', {
   'stream': false,
   'logprobs': null,
   'stop': '\n'
-})
-```
-
-The client also provides methods for several common actions, such as retrieving models and canceling fine-tuning processes. These methods are created by wrapping the corresponding methods of the OpenAI API and normalizing their argument formats.
-
-```javascript
-client.retrieveModel('image-alpha-001')
-client.cancelFineTune('fine-tune-123')
-```
-
-Note that these wrapped methods only accept a single object as their argument, with the keys being the names of the parameters that the OpenAI API method expects. The values of the object should be the values of the parameters.
-
-```javascript
-client.createImageEdit({
-  image: '/path/to/image.jpg',
-  mask: '/path/to/mask.png'
 })
 ```
 
