@@ -6,7 +6,6 @@
   "bin": {
     "openai": "bin/cli.js"
   },
-  "private": true,
   "scripts": {
     "test": "nyc --reporter=html --reporter=text mocha"
   },
