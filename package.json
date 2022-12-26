@@ -26,7 +26,7 @@
     "url": "git@github.com:mirnes-cajlakovic/openai-cli.git"
   },
   "publishConfig": {
-     "registry": "https://npm.pkg.github.com/"
+     "@mirnes-cajlakovic:registry": "https://npm.pkg.github.com/"
    },
   "license": "MIT",
   "dependencies": {
