@@ -55,7 +55,7 @@ export OPENAI_API_KEY="YOUR_API_KEY_HERE"
 | `version` | `boolean` | `false` | Output the version number of the openai cli. |
 | `help` | `boolean` | `false` | Display help for a specific command or general help if no command is provided. |
 
-cancelFineTune [options]
+cancelFineTune
 Immediately cancel a fine-tune job.
 
 #### Options:
@@ -65,7 +65,7 @@ Immediately cancel a fine-tune job.
 | `fine-tune-id` | `string` | `null` | The ID of the fine-tune job to cancel. |
 
 
-createCompletion [options]
+createCompletion
 Creates a completion for the provided prompt and parameters.
 
 #### Options:
@@ -90,7 +90,7 @@ Creates a completion for the provided prompt and parameters.
 openai createCompletion --prompt "The quick brown fox jumps over the lazy" --model "text-davinci-003"
 ```
 
-### createEdit [options]
+### createEdit
 Creates a new edit for the provided input, instruction, and parameters.
 
 #### Options:
@@ -109,7 +109,7 @@ Creates a new edit for the provided input, instruction, and parameters.
 openai createEdit --input "The quick brown fox jumps over the lazy dog." --instruction "Make the sentence more interesting" --model "text-davinci-003"
 ```
 
-### createEmbedding [options]
+### createEmbedding
 Creates an embedding vector representing the input text.
 
 #### Options:
@@ -125,7 +125,7 @@ Creates an embedding vector representing the input text.
 openai createEmbedding --input "The quick brown fox jumps over the lazy dog." --model "text-davinci-003"
 ```
 
-### createFile [options]
+### createFile
 Upload a file that contains document(s) to be used across various endpoints/features. Currently, the size of all the files uploaded by one organization can be up to 1 GB.
 
 #### Options:
@@ -140,7 +140,7 @@ Upload a file that contains document(s) to be used across various endpoints/feat
 openai createFile --file "/path/to/training.jsonl" --purpose "fine-tune"
 ```
 
-### createFineTune [options]
+### createFineTune
 Creates a job that fine-tunes a specified model from a given dataset.
 
 #### Options:
@@ -164,7 +164,7 @@ Creates a job that fine-tunes a specified model from a given dataset.
 openai createFineTune --model "davinci" --training-file "file-i9DZk2twt4deNezMYtPf1LCN"
 ```
 
-### createImage [options]
+### createImage
 Creates an image given a prompt.
 
 #### Options:
@@ -182,7 +182,7 @@ Creates an image given a prompt.
 openai createImage --prompt "A dog playing fetch" --size "512x512"
 ```
 
-### createImageEdit [options]
+### createImageEdit
 Creates an edited or extended image given an original image and a prompt.
 
 #### Options:
@@ -203,7 +203,7 @@ openai createImageEdit --prompt "Add a cat to the image" --image "photo.png" --m
 
 ```
 
-### createImageVariation [options]
+### createImageVariation
 Creates a variation of a given image.
 
 #### Options:
@@ -222,7 +222,7 @@ Creates a variation of a given image.
 openai createImageVariation --image "fox.png" --response-format "b64_json"
 ```
 
-### createModeration [options]
+### createModeration
 Classifies if text violates OpenAI's Content Policy
 
 #### Options:
@@ -237,7 +237,7 @@ Classifies if text violates OpenAI's Content Policy
 openai createModeration --input "The quick brown fox jumps over the lazy dog."
 ```
 
-### deleteFile [options]
+### deleteFile
 Delete a file.
 
 #### Options:
@@ -251,7 +251,7 @@ Delete a file.
 openai deleteFile --file-id "file-i9DZk2twt4deNezMYtPf1LCN"
 ```
 
-### deleteModel [options]
+### deleteModel
 Delete a fine-tuned model. You must have the Owner role in your organization.
 
 #### Options:
@@ -265,7 +265,7 @@ Delete a fine-tuned model. You must have the Owner role in your organization.
 openai deleteModel --model "davinci:ft-org-domain-2022-12-22-07-26-01"
 ```
 
-### downloadFile [options]
+### downloadFile
 Returns the contents of the specified file.
 
 #### Options:
@@ -295,7 +295,7 @@ Returns a list of files that belong to the user's organization.
 openai listFiles
 ```
 
-### listFineTuneEvents [options]
+### listFineTuneEvents
 Get fine-grained status updates for a fine-tune job.
 
 #### Options:
@@ -326,7 +326,7 @@ Lists the currently available models, and provides basic information about each 
 openai listModels
 ```
 
-### retrieveEngine [options]
+### retrieveEngine
 Retrieves a model instance, providing basic information about it such as the owner and availability.
 
 #### Options:
@@ -340,7 +340,7 @@ Retrieves a model instance, providing basic information about it such as the own
 openai retrieveEngine --engine-id "text-search-babbage-query-001"
 ```
 
-### retrieveFile [options]
+### retrieveFile
 Returns information about a specific file.
 
 #### Options:
@@ -354,7 +354,7 @@ Returns information about a specific file.
 openai retrieveFile --file-id "file-i9DZk2twt4deNezMYtPf1LCN"
 ```
 
-### retrieveFineTune [options]
+### retrieveFineTune
 Gets info about the fine-tune job.
 
 #### Options:
@@ -368,7 +368,7 @@ Gets info about the fine-tune job.
 openai retrieveFineTune --fine-tune-id "ft-vMYr5UujI7bKEHmObuHXbtB"
 ```
 
-### retrieveModel [options]
+### retrieveModel
 Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
 
 #### Options:
