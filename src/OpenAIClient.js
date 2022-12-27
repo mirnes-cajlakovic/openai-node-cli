@@ -52,7 +52,7 @@ class OpenAIClient {
    */
   handleResponse (response) {
     if (isObject(response.data) || isArray(response.data)) {
-      response = JSON.stringify(response.data, null, 2)
+      return JSON.stringify(response.data, null, 2)
     }
 
     return response.data
@@ -83,7 +83,6 @@ class OpenAIClient {
     const methodReference = OpenAIApi.prototype[methodName]
     
     OpenAIApi.prototype[methodName] = async function (options) {
-      
       // Convert an array of option keys to an array of option values
       const parameters = keys.map((key) => {
         const regex = /<(.*?)>/
