@@ -44,17 +44,29 @@ class OpenAIClient {
     }
   }
 
+  /**
+   * Handles the response from an HTTP request.
+   *
+   * @param {Object} response - The response object.
+   * @return {any} The data from the response.
+   */
   handleResponse (response) {
     if (isObject(response.data) || isArray(response.data)) {
       response = JSON.stringify(response.data, null, 2)
     }
-    
+
     return response.data
   }
 
+  /**
+   * Handles an error from an HTTP request.
+   *
+   * @param {Error} error - The error object.
+   * @throws {Error} The error object.
+   */
   handleError (error) {
     if (error.response) {
-      return JSON.stringify(error.response.data, null, 2)  
+      return JSON.stringify(error.response.data, null, 2)
     }
 
     throw error
