@@ -48,14 +48,7 @@ export OPENAI_API_KEY="YOUR_API_KEY_HERE"
 
 ## Commands:
 
-#### Options:
-
-| Name | Type | Default | Description |
-|------|------|---------|-------------|
-| `version` | `boolean` | `false` | Output the version number of the openai cli. |
-| `help` | `boolean` | `false` | Display help for a specific command or general help if no command is provided. |
-
-cancelFineTune
+### cancelFineTune
 Immediately cancel a fine-tune job.
 
 #### Options:
@@ -65,7 +58,7 @@ Immediately cancel a fine-tune job.
 | `fine-tune-id` | `string` | `null` | The ID of the fine-tune job to cancel. |
 
 
-createCompletion
+### createCompletion
 Creates a completion for the provided prompt and parameters.
 
 #### Options:
@@ -286,6 +279,31 @@ Lists the currently available (non-finetuned) models, and provides basic informa
 ```bash
 openai listEngines
 ```
+#### Output:
+```json
+{
+  "object": "list"
+  "data": [
+    {
+      "object": "engine",
+      "id": "babbage",
+      "ready": true,
+      "owner": "openai",
+      "permissions": null,
+      "created": null
+    },
+    {
+      "object": "engine",
+      "id": "ada",
+      "ready": true,
+      "owner": "openai",
+      "permissions": null,
+      "created": null
+    }
+  ]
+}
+```
+
 
 ### listFiles
 Returns a list of files that belong to the user's organization.
@@ -293,6 +311,34 @@ Returns a list of files that belong to the user's organization.
 #### Example:
 ```bash
 openai listFiles
+```
+#### Output:
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "file",
+      "id": "file-rph3Zutld7ImjVXN9hQhHjc",
+      "purpose": "fine-tune-results",
+      "filename": "compiled_results.csv",
+      "bytes": 1790,
+      "created_at": 1671693962,
+      "status": "processed",
+      "status_details": null
+    },
+    {
+      "object": "file",
+      "id": "file-e8DZk4twt8dbNezMYtPf1LCN",
+      "purpose": "fine-tune",
+      "filename": "twenty-one.jsonl",
+      "bytes": 519,
+      "created_at": 1671690297,
+      "status": "processed",
+      "status_details": null
+    }
+  ]
+}
 ```
 
 ### listFineTuneEvents
@@ -317,6 +363,55 @@ List your organization's fine-tuning jobs.
 ```bash
 openai listFineTunes
 ```
+#### Output:
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "fine-tune",
+      "id": "ft-XuYr4UujI7bKEHmXb9vHXbtB",
+      "hyperparams": {
+        "n_epochs": 4,
+        "batch_size": 1,
+        "prompt_loss_weight": 0.01,
+        "learning_rate_multiplier": 0.1
+      },
+      "organization_id": "org-uik025NZM3fVwbeO4wTFb645",
+      "model": "curie",
+      "training_files": [
+        {
+          "object": "file",
+          "id": "file-dtIeV15XKVQI80qyMK2pOI7t",
+          "purpose": "fine-tune",
+          "filename": "training.jsonl",
+          "bytes": 501,
+          "created_at": 1671655748,
+          "status": "deleted",
+          "status_details": null
+        }
+      ],
+      "validation_files": [],
+      "result_files": [
+        {
+          "object": "file",
+          "id": "file-fQRWLGltMGsRWzsHqO7Krl0m",
+          "purpose": "fine-tune-results",
+          "filename": "compiled_results.csv",
+          "bytes": 1458,
+          "created_at": 1671657273,
+          "status": "deleted",
+          "status_details": null
+        }
+      ],
+      "created_at": 1671656382,
+      "updated_at": 1671657273,
+      "status": "succeeded",
+      "fine_tuned_model": "curie:ft-org-name-2022-12-21-21-14-32"
+    }
+  ]
+}   
+```
 
 ### listModels
 Lists the currently available models, and provides basic information about each one such as the owner and availability.
@@ -324,6 +419,38 @@ Lists the currently available models, and provides basic information about each 
 #### Example:
 ```bash
 openai listModels
+```
+#### Output:
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "davinci:ft-org-name-2022-12-22-07-26-01",
+      "object": "model",
+      "created": 1671693961,
+      "owned_by": "org-name",
+      "permission": [
+        {
+          "id": "snapperm-eZpZLBCmKmXs2ccdRtUsmxFV",
+          "object": "model_permission",
+          "created": 1671693961,
+          "allow_create_engine": true,
+          "allow_sampling": true,
+          "allow_logprobs": true,
+          "allow_search_indices": false,
+          "allow_view": true,
+          "allow_fine_tuning": true,
+          "organization": "org-uiEo25NZM3fVwbLT4wTFb456",
+          "group": null,
+          "is_blocking": false
+        }
+      ],
+      "root": "davinci:2020-05-03",
+      "parent": "davinci:2020-05-03"
+    }
+  ]
+}
 ```
 
 ### retrieveEngine
@@ -339,6 +466,30 @@ Retrieves a model instance, providing basic information about it such as the own
 ```bash
 openai retrieveEngine --engine-id "text-search-babbage-query-001"
 ```
+#### Output:
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "engine",
+      "id": "audio-transcribe-001",
+      "ready": true,
+      "owner": "openai",
+      "permissions": null,
+      "created": null
+    },
+    {
+      "object": "engine",
+      "id": "davinci-similarity",
+      "ready": true,
+      "owner": "openai-dev",
+      "permissions": null,
+      "created": null
+    }
+  ]
+}
+```
 
 ### retrieveFile
 Returns information about a specific file.
@@ -352,6 +503,19 @@ Returns information about a specific file.
 #### Example:
 ```bash
 openai retrieveFile --file-id "file-i9DZk2twt4deNezMYtPf1LCN"
+```
+#### Output:
+```json
+{
+  "object": "file",
+  "id": "file-e8DZk4twt8dbNezMYtPf1vCN",
+  "purpose": "fine-tune",
+  "filename": "prompts.jsonl",
+  "bytes": 519,
+  "created_at": 1671690297,
+  "status": "processed",
+  "status_details": null
+}
 ```
 
 ### retrieveFineTune
@@ -367,6 +531,64 @@ Gets info about the fine-tune job.
 ```bash
 openai retrieveFineTune --fine-tune-id "ft-vMYr5UujI7bKEHmObuHXbtB"
 ```
+#### Output:
+```json
+{
+  "object": "fine-tune",
+  "id": "ft-ufGTYcH6ofN0mce9xGQeTXE9",
+  "hyperparams": {
+    "n_epochs": 4,
+    "batch_size": 1,
+    "prompt_loss_weight": 0.01,
+    "learning_rate_multiplier": 0.1
+  },
+  "organization_id": "org-oij025NZw3fVwbiT4wTFb6k6",
+  "model": "davinci",
+  "training_files": [
+    {
+      "object": "file",
+      "id": "file-e8DZk4tvt8dbNezMYtPf1LCN",
+      "purpose": "fine-tune",
+      "filename": "twenty-one.jsonl",
+      "bytes": 519,
+      "created_at": 1671690297,
+      "status": "processed",
+      "status_details": null
+    }
+  ],
+  "validation_files": [],
+  "result_files": [
+    {
+      "object": "file",
+      "id": "file-Kqpe3Zutld7ImjVXN9hQhHjc",
+      "purpose": "fine-tune-results",
+      "filename": "compiled_results.csv",
+      "bytes": 1790,
+      "created_at": 1671693962,
+      "status": "processed",
+      "status_details": null
+    }
+  ],
+  "created_at": 1671690698,
+  "updated_at": 1671693963,
+  "status": "succeeded",
+  "fine_tuned_model": "davinci:ft-org-name-2022-12-22-07-26-01",
+  "events": [
+    {
+      "object": "fine-tune-event",
+      "level": "info",
+      "message": "Created fine-tune: ft-rVGTuCH6ofN0mce9xGQeTXE9",
+      "created_at": 1671690698
+    },
+    {
+      "object": "fine-tune-event",
+      "level": "info",
+      "message": "Fine-tune costs $0.01",
+      "created_at": 1671690710
+    }
+  ]
+}
+```
 
 ### retrieveModel
 Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
@@ -381,6 +603,33 @@ Retrieves a model instance, providing basic information about the model such as 
 ```bash
 openai retrieveModel --model "text-davinci-003"
 ```
+#### Output:
+```json
+{
+  "id": "text-davinci-003",
+  "object": "model",
+  "created": 1669599635,
+  "owned_by": "openai-internal",
+  "permission": [
+    {
+      "id": "modelperm-avGyoQNQYTDulwkeSa6n60ry",
+      "object": "model_permission",
+      "created": 1671910080,
+      "allow_create_engine": false,
+      "allow_sampling": true,
+      "allow_logprobs": true,
+      "allow_search_indices": false,
+      "allow_view": true,
+      "allow_fine_tuning": false,
+      "organization": "*",
+      "group": null,
+      "is_blocking": false
+    }
+  ],
+  "root": "text-davinci-003",
+  "parent": null
+}
+```
 
 ### help [command]
 Display help for a specific command.
@@ -388,4 +637,34 @@ Display help for a specific command.
 #### Example:
 ```bash
 openai help createCompletion
+```
+#### Output:
+```bash
+Usage: openai-node-cli createCompletion [options]
+
+Creates a completion for the provided prompt and parameters
+
+Options:
+  --model <string>             ID of the model to use. You can use the List models API to see all of your available models, or see our Model overview for descriptions of them. (default: "text-davinci-003")
+  --prompt <strings...>        The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays. (default: "<|endoftext|>")
+  --suffix <string>            The suffix that comes after a completion of inserted text. (default: null)
+  --max-tokens <integer>       The maximum number of tokens to generate in the completion. (default: 16)
+  --temperature <float>        What sampling temperature to use. Higher values means the model will take more risks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones with a well-defined
+                               answer. (default: 0)
+  --top-p <float>              An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens
+                               comprising the top 10% probability mass are considered. (default: 1)
+  --n <integer>                How many completions to generate for each prompt. (default: 1)
+  --stream <boolean>           Whether to stream back partial progress. If set, tokens will be sent as data-only server-sent events as they become available, with the stream terminated by a data: [DONE] message.
+                               (default: false)
+  --logprobs <integer>         Include the log probabilities on the logprobs most likely tokens, as well the chosen tokens. For example, if logprobs is 5, the API will return a list of the 5 most likely tokens.
+                               The API will always return the logprob of the sampled token, so there may be up to logprobs+1 elements in the response. (default: null)
+  --echo <boolean>             Echo back the prompt in addition to the completion (default: false)
+  --stop <strings...>          Up to 4 sequences where the API will stop generating further tokens. The returned text will not contain the stop sequence. (default: null)
+  --presence-penalty <float>   Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+                               (default: 0)
+  --frequency-penalty <float>  Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line
+                               verbatim. (default: 0)
+  --best-of <integer>          Generates best_of completions server-side and returns the 'best' (the one with the highest log probability per token). Results cannot be streamed. (default: 1)
+  --user <string>              A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more.
+  -h, --help                   display help for command
 ```
