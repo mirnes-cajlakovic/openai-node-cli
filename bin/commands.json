@@ -418,7 +418,7 @@
         "name": "batch-size",
         "type": "integer",
         "condition": "Optional",
-        "default": "null",
+        "default": "0",
         "description": "The batch size to use for training. The batch size is the number of training examples used to train a single forward and backward pass."
       },
       {
@@ -467,7 +467,7 @@
         "name": "suffix",
         "type": "string",
         "condition": "Optional",
-        "default": "null",
+        "default": "",
         "description": "A string of up to 40 characters that will be added to your fine-tuned model name."
       }
     ]
