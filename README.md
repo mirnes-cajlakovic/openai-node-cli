@@ -888,4 +888,3 @@ openai retrieveModel --model "text-davinci-003"
   "root": "text-davinci-003",
   "parent": null
 }
-```
