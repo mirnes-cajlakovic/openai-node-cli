@@ -1,6 +1,6 @@
 {
   "name": "openai-node-cli",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "The openai-cli package is a command line interface (CLI) for interacting with the OpenAI API. It allows you to perform various operations using the OpenAI API, such as creating completions, images, and embeddings, uploading and downloading files, and managing fine-tune jobs and models.",
   "keywords": [
     "openai",
