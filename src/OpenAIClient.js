@@ -1,5 +1,5 @@
 const { Configuration, OpenAIApi } = require('openai')
-const { mapKeys, snakeCase, get } = require('lodash')
+const { mapKeys, snakeCase, isObject, isArray, get } = require('lodash')
 const fs = require('fs')
 
 /**
@@ -12,38 +12,54 @@ class OpenAIClient {
    */
   constructor(apiKey) {
     // Wrap api methods to normalize argument format
-    this.wrap('cancelFineTune', 'fine_tune_id')
-    this.wrap('createFile', 'file<stream>', 'purpose')
-    this.wrap('createImageEdit', 'image<stream>', 'mask<stream>')
-    this.wrap('createImageVariation', 'image<stream>', 'n', 'size', 'response_format', 'user')
-    this.wrap('deleteFile', 'file_id')
-    this.wrap('deleteModel', 'model')
-    this.wrap('downloadFile', 'file_id')
-    this.wrap('retrieveFile', 'file_id')
-    this.wrap('retrieveFineTune', 'fine_tune_id')
-    this.wrap('retrieveModel', 'model')
+    this.wrapMethod('cancelFineTune', 'fine_tune_id')
+    this.wrapMethod('createFile', 'file<stream>', 'purpose')
+    this.wrapMethod('createImageEdit', 'image<stream>', 'mask<stream>')
+    this.wrapMethod('createImageVariation', 'image<stream>', 'n', 'size', 'response_format', 'user')
+    this.wrapMethod('deleteFile', 'file_id')
+    this.wrapMethod('deleteModel', 'model')
+    this.wrapMethod('downloadFile', 'file_id')
+    this.wrapMethod('retrieveFile', 'file_id')
+    this.wrapMethod('retrieveFineTune', 'fine_tune_id')
+    this.wrapMethod('retrieveModel', 'model')
 
     this.configuration = new Configuration({ apiKey })
     this.openai = new OpenAIApi(this.configuration)
   }
 
   /**
-   * Make a request to the openai api.
+   * Make a request to the openai api based on provided methodName and options.
    * @param {string} methodName - The name of the method to call on the openai api.
    * @param {Object} options - The options for the request.
    * @returns {Promise} A promise that resolves to the data returned by the api.
    */
-  async request(methodName, options = {}) {
+  async executeMethod(methodName, options = {}) {
     // Convert all the keys in the options object to snake case
     const snakeCaseOptions = mapKeys(options, (value, key) => snakeCase(key))
 
     if (this.openai[methodName]) {
       return await this.openai[methodName](snakeCaseOptions)
-        .then((response) => response.data)
-        .catch((error) => error?.response?.data || error)
+        .then(this.handleResponse)
+        .catch(this.handleError)
     }
   }
-  
+
+  handleResponse (response) {
+    if (isObject(response.data) || isArray(response.data)) {
+      response = JSON.stringify(response.data, null, 2)
+    }
+    
+    return response
+  }
+
+  handleError (error) {
+    if (error.response) {
+      return JSON.stringify(error.response.data, null, 2)  
+    }
+
+    throw error
+  }
+
   /**
    * Wrap methods from the openai api to normalize method arguments.
    * @param {string} methodName - The name of the method to wrap.
@@ -51,7 +67,7 @@ class OpenAIClient {
    * @returns {void}
    */
 
-  wrap(methodName, ...keys) {
+  wrapMethod(methodName, ...keys) {
     const methodReference = OpenAIApi.prototype[methodName]
     
     OpenAIApi.prototype[methodName] = async function (options) {

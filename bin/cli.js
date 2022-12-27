@@ -22,6 +22,7 @@ program
   .name('openai-node-cli')
   .description('The openai command is a command line interface (CLI) for interacting with the OpenAI API. It allows you to perform various operations using the OpenAI API, such as creating completions, images, and embeddings, uploading and downloading files, and managing fine-tune jobs and models.')
   .version('1.0.0')
+  .option('--response-format <string>', 'The format to return responses in.', 'json')
 
 /**
  * Iterate through the available commands and add them to the program.
@@ -37,7 +38,7 @@ for (var command of commands.sort((a, b) => a.name.localeCompare(b.name))) {
   /**
    * Set the action for the command to make a request to the OpenAI API using the OpenAI client.
    */
-  addCommand.action((options, instance) => openaiClient.request(instance.parent.args[0], options).then(console.log))
+  addCommand.action((options, instance) => openaiClient.executeMethod(instance.parent.args[0], options).then(console.log))
 
   /**
    * Iterate through the command's parameters and add them as options to the command.
