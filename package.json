@@ -26,8 +26,8 @@
     "url": "git@github.com:mirnes-cajlakovic/openai-node-cli.git"
   },
   "publishConfig": {
-     "@mirnes-cajlakovic:registry": "https://npm.pkg.github.com/"
-   },
+    "@mirnes-cajlakovic:registry": "https://npm.pkg.github.com/"
+  },
   "license": "MIT",
   "dependencies": {
     "commander": "^9.4.1",
