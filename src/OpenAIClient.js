@@ -49,7 +49,7 @@ class OpenAIClient {
       response = JSON.stringify(response.data, null, 2)
     }
     
-    return response
+    return response.data
   }
 
   handleError (error) {
