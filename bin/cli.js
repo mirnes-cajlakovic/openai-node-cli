@@ -4,7 +4,6 @@ const { Command, Option } = require('commander')
 const { OpenAIClient } = require('../index')
 const commands = require('./commands')
 
-
 /**
  * Create a new OpenAI client for each command.
  */
@@ -27,8 +26,7 @@ program
 /**
  * Iterate through the available commands and add them to the program.
  */
-for (var command of commands.sort((a, b) => a.name.localeCompare(b.name))) {
-
+for (const command of commands.sort((a, b) => a.name.localeCompare(b.name))) {
   /**
    * Create a new command with the specified name and description.
    */
@@ -43,15 +41,14 @@ for (var command of commands.sort((a, b) => a.name.localeCompare(b.name))) {
   /**
    * Iterate through the command's parameters and add them as options to the command.
    */
-  for (var param of command.params) {
-
+  for (const param of command.params) {
     /**
      * Set the flags for the option using the parameter name and type.
      */
     param.flags = '--<flag> <<type>>'
       .replace('<flag>', param.name)
       .replace('<type>', param.type)
-    
+
     /**
      * Create a new option with the specified flags and description.
      */
@@ -97,18 +94,15 @@ for (var command of commands.sort((a, b) => a.name.localeCompare(b.name))) {
      * Add the option to the command.
      */
     addCommand.addOption(addOption)
-
   }
 
   /**
    * Add the command to the program.
    */
   program.addCommand(addCommand)
-
 }
 
 /**
  * Parse the command line arguments and execute the program.
  */
 program.parseAsync()
-

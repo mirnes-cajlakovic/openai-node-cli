@@ -1,4 +1,7 @@
 # OpenAI Node.js CLI
+[![npm version](https://badge.fury.io/js/openai-node-cli.svg)](https://badge.fury.io/js/openai-node-cli)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
+
 ### Command Line Interface
 The `openai-node-cli` package is a command line interface (CLI) for interacting with the OpenAI API. It allows you to perform various operations using the OpenAI API, such as creating completions, images, and embeddings, uploading and downloading files, and managing fine-tune jobs and models.
 

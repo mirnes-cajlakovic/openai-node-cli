@@ -10,7 +10,7 @@ class OpenAIClient {
    * Creates a new OpenAIClient.
    * @param {string} apiKey - The api key to use for authenticating requests.
    */
-  constructor(apiKey) {
+  constructor (apiKey) {
     // Wrap api methods to normalize argument format
     this.wrapMethod('cancelFineTune', 'fine_tune_id')
     this.wrapMethod('createFile', 'file<stream>', 'purpose')
@@ -33,7 +33,7 @@ class OpenAIClient {
    * @param {Object} options - The options for the request.
    * @returns {Promise} A promise that resolves to the data returned by the api.
    */
-  async executeMethod(methodName, options = {}) {
+  async executeMethod (methodName, options = {}) {
     // Convert all the keys in the options object to snake case
     const snakeCaseOptions = mapKeys(options, (value, key) => snakeCase(key))
 
@@ -79,9 +79,9 @@ class OpenAIClient {
    * @returns {void}
    */
 
-  wrapMethod(methodName, ...keys) {
+  wrapMethod (methodName, ...keys) {
     const methodReference = OpenAIApi.prototype[methodName]
-    
+
     OpenAIApi.prototype[methodName] = async function (options) {
       // Convert an array of option keys to an array of option values
       const parameters = keys.map((key) => {
@@ -96,7 +96,6 @@ class OpenAIClient {
       return await methodReference.apply(this, parameters)
     }
   }
-
 }
 
 module.exports = OpenAIClient
