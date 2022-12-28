@@ -11,8 +11,6 @@ jobs:
   
   test:
     runs-on: ubuntu-latest
-    environment:
-      name: test
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -26,8 +24,6 @@ jobs:
   release:
     needs: [ test ]
     runs-on: ubuntu-latest
-    environment:
-      name: release
     steps:
       - uses: actions/create-release@v1
         with:
@@ -41,8 +37,6 @@ jobs:
   publish:
     needs: [ test, release ]
     runs-on: ubuntu-latest
-    environment:
-      name: publish
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
